@@ -62,6 +62,13 @@ int main(int argc, char*argv[])
           * another PID controller to control the speed!
           */
           steer_value = pid.TotalError();
+          if(steer_value < -1){
+            steer_value = - 1;
+          }
+          if(steer_value >1){
+            steer_value = 1;
+          }
+          
           pid.UpdateError(cte);
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
