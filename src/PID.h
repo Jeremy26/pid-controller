@@ -1,3 +1,7 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+using namespace std;
 #ifndef PID_H
 #define PID_H
 
@@ -36,7 +40,14 @@ public:
   * Update the PID error variables given cross track error.
   */
   void UpdateError(double cte);
-  void Twiddle();
+
+  /*
+  * Helper function & Twiddle Algorithm
+  */
+  double Sum(std::vector<double> dp);
+  void Twiddle(double tolerance, double cte);
+  bool twiddle;
+  double best_error;
   /*
   * Calculate the total PID error.
   */
