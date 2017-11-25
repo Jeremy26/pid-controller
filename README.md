@@ -1,6 +1,51 @@
 # CarND-Controls-PID
 Self-Driving Car Engineer Nanodegree Program
 
+[//]: # (Image References)
+[image1] : /report/pic.png "PID"
+[image2] : /report/block_diagram.png "PID Diagram"
+[image3] : /report/formula.png "PID Formula"
+[image4] : /report/graph.png "PID Graph"
+
+
+This project is about implementing PID and discussing what is a PID.
+![alt text][image1]
+PID means three things : 
+* Proportional
+* Derivative
+* Integral
+
+The PID block diagram can help to figure out.
+
+![alt text][image3]
+
+In the self-driving car we are trying to implement, we put a PID regulator to output the steering angle.
+A PID simply means that we look at an error and are trying to minimize it. I refer you to [a project](https://github.com/Jeremy26/behavioral-cloning) where we also want to predict a steering angle with Deep Learning. 
+
+Predicting the angle is this time done with robotics. The behavioral cloning project above had a PID to drive the car (move forward) but not to predict the angle.
+
+Looking at the formula and the following graph, we can comment a few things.
+
+![alt text][image3]
+![alt text][image4]
+
+We have a reference line in red we want to follow, and we have robotics and math formulas to follow it. The goal for a self-driving car is to stay in the center of the line. Now suppose we know where the center of the line is, maybe we used Deep Learning or Computer Vision to find out. I can send you to [this project](https://github.com/Jeremy26/advanced-lane-lines) where we output the distance to the center of the road.
+The distance is this time called Cross Track Error. Our goal is to minimize it.
+
+The formula above has a sum of all three components.
+* The Proportional component is how we oscillates. This component steers the car proporionally to the CTE to get back to the center of the road. Unfortunately and as observed in the graph above, this controller alone will make the car oscillate around the center without ever going straight. We can see that this looks at the derivative of the CTE over time elapsed.
+* The Derivative component is here to compensate these oscillations. A PD Controller is a good implementation but has a bias due to real life conditions. This bias can prevent the robot to go back to the center.
+* The Integral component is here to make a sum of the errors and go back to the center, to compensate the bias.
+
+Now that we know what a PID is, let's look at the error parameters, the three Tau.
+* Tp is small because we don't want the car to oscillate too much : *0.17*
+* Ti is even smaller because we don't have a huge bias. *0.004*
+* Td is huge because we want a big compensation to Tp. *3*
+I chose Sebastian Thrun's initial component 0.2,0.004 and 3 and tweaked them all, this is a fine combination.
+I did not implement Twiddle to find the parameters, having a parameter optimization algorithm would make the solution better.
+
+Concerning the speed, I chose a small value of 35 mph that manages to keep the car on the road. If we get that speed higher, we would need a PID controller to adjust the throttle parameters. When we go at high speed, we don't need as much steering as when we drive slowly. This would need to be taken into account.
+
 ---
 
 ## Dependencies
