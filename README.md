@@ -17,7 +17,7 @@ PID means three things :
 
 The PID block diagram can help to figure out.
 
-![alt text][image3]
+![alt text][image2]
 
 In the self-driving car we are trying to implement, we put a PID regulator to output the steering angle.
 A PID simply means that we look at an error and are trying to minimize it. I refer you to [a project](https://github.com/Jeremy26/behavioral-cloning) where we also want to predict a steering angle with Deep Learning. 
