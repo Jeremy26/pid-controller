@@ -9,7 +9,9 @@ Self-Driving Car Engineer Nanodegree Program
 
 
 This project is about implementing PID and discussing what is a PID.
-![alt text][image1]
+[![VIDEO](report/pid_vid.png)](https://www.youtube.com/watch?v=Ircowtx9sRo "PID")
+
+
 PID means three things : 
 * Proportional
 * Derivative
